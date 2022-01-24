@@ -19,7 +19,8 @@ spec:
         image: ubuntu
         ports:
         - containerPort: 22
-        
+      imagePullSecrets:
+      - name: regcred   
         
 ---
 
