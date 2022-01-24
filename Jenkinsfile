@@ -9,12 +9,6 @@ pipeline {
 
   stages {
 
-    stage('Checkout Source') {
-      steps {
-        git 'https://github.com/Shridhanr/bonsai.git'
-      }
-    }
-
     stage('Build image') {
       steps{
         script {
