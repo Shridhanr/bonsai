@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: ubuntu-deployment
   labels:
-    app: nginx
+    app: ubuntu
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: ubuntu
   template:
     metadata:
       labels:
-        app: nginx 
+        app: ubuntu 
     spec:
       containers:
-      - name: nginx
-        image: nginx
+      - name: ubuntu-container
+        image: ubuntu
         ports:
-        - containerPort: 80
+        - containerPort: 22
         
         
 ---
@@ -26,13 +26,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: ubuntu-service
 spec:
   selector:
-    app: nginx 
+    app: ubuntu 
   type: LoadBalancer
   ports:
   - protocol: TCP
-    port: 80
-    targetPort: 80
-    nodePort: 31080
+    port: 22
+    targetPort: 22
+    nodePort: 31022
