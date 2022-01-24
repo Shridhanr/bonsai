@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    dockerimagename = "shridhanr/nginx"
+    dockerimagename = "shridhanr/ubuntu"
     dockerImage = ""
   }
 
