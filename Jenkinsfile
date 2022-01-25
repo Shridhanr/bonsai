@@ -43,6 +43,7 @@ pipeline {
       sh 'chmod +x ./aws-iam-authenticator'
       sh 'mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin'
       sh "echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc"
+      sh 'aws-iam-authenticator help'
       sh 'kubectl apply -f deploymentservice.yml'
      }
     }
