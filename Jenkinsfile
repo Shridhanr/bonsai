@@ -37,13 +37,12 @@ pipeline {
       }
     }*/
    stage('Apply Kubernetes files') {
-    def SERVICE_NAME = bonsai_test
     steps  {
       withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
           //sh 'mkdir .kube && cat $KUBECONFIG > .kube/config'
           // sh "kubectl -n app create configmap ${SERVICE_NAME}-dev-config --from-file=config/dev.yaml -o yaml --dry-run=client | kubectl apply -f -"
           sh 'chmod +x deploy.sh'
-          sh "deploy.sh ${env.BUILD_ID} ${SERVICE_NAME}"
+          sh "deploy.sh ${env.BUILD_ID} bonsai-service"
           sh "echo 'deployment completed successfully'"
           }
       /*withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://3.86.119.88:6443']) {

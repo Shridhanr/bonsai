@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IMAGE_TAG=$1
-SERVICE_NAME=$2
+SERVICE_NAME=bonsai-service
 
 
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
