@@ -5,8 +5,8 @@ SERVICE_NAME=bonsai-service
 
 
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-pwd
-ls $parent_path
+#pwd
+#ls $parent_path
 #cat $parent_path/kubernetes.yml
 # read the yml template from a file and substitute the string
 template=`cat "$parent_path/deploymentservice.yml" | sed "s/{{IMAGE_TAG}}/$IMAGE_TAG/g" | sed "s/{{SERVICE_NAME}}/$SERVICE_NAME/g"`
