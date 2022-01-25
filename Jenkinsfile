@@ -6,8 +6,7 @@ pipeline {
   }
 
   agent any
-  //global variable
-  def SERVICE_NAME = bonsai_test
+  
   stages {
 
     stage('Build image') {
@@ -38,6 +37,8 @@ pipeline {
       }
     }*/
    stage('Apply Kubernetes files') {
+    //global variable
+    def SERVICE_NAME = bonsai_test
     steps  {
       withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
           //sh 'mkdir .kube && cat $KUBECONFIG > .kube/config'
