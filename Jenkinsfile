@@ -34,8 +34,7 @@ pipeline {
        script {
             sh 'export PATH=$PATH:/home/ubuntu/.kube/config'
             //sh 'sudo export KUBECONFIG=/home/ubuntu/.kube/config'
-            //sh 'mkdir .kube && cat $KUBECONFIG > .kube/config'
-            sh "sudo -i"
+            sh 'mkdir .kube && cat $KUBECONFIG > .kube/config'
             sh "kubectl apply -f deploymentservice.yml"
             sh "echo 'deployment completed successfully'"
             }
