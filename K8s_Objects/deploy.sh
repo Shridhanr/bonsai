@@ -3,7 +3,6 @@
 IMAGE_TAG=$1
 SERVICE_NAME=bonsai-service
 
-echo 'export PATH=/home/ubuntu/bin/aws-iam-authenticator:$PATH' >> ~/.bashrc
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 #ls $parent_path
 #cat $parent_path/kubernetes.yml
