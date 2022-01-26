@@ -17,7 +17,7 @@ spec:
       serviceAccountName: bonsai
       containers:
       - name: ubuntu-container
-        image: ubuntu:latest
+        image: docker.io/shridhanr/ubuntu:latest
         ports:
         - containerPort: 22
       imagePullSecrets:
