@@ -41,6 +41,7 @@ pipeline {
       withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
           //sh 'mkdir .kube && cat $KUBECONFIG > .kube/config'
           // sh "kubectl -n app create configmap ${SERVICE_NAME}-dev-config --from-file=config/dev.yaml -o yaml --dry-run=client | kubectl apply -f -"
+          sh 'export PATH=$PATH:/home/ubuntu/bin/aws-iam-authenticator'
           sh 'chmod +x K8s_Objects/deploy.sh'
           sh "K8s_Objects/deploy.sh ${env.BUILD_ID} bonsai-service"
           sh "echo 'deployment completed successfully'"
