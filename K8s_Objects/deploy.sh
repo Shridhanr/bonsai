@@ -5,7 +5,6 @@ SERVICE_NAME=bonsai-service
 
 
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-#pwd
 #ls $parent_path
 #cat $parent_path/kubernetes.yml
 # read the yml template from a file and substitute the string
