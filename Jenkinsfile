@@ -16,8 +16,8 @@ node('master') {
             stage('Docker Build & Push') {
                 /*docker.withRegistry('https://registry.hub.docker.com', 'Docker_creds') */
                 withCredentials([string(credentialsId: '4710ad4f-2401-4a57-b9d0-7ff395aefad5', variable: 'PAT')]) {
-                def customImage1 = docker.build("shridhanr/${SERVICE_NAME}-main", "-f ${dockerfile1} .", "--build-arg GIT_PAT=${PAT} .")
-                def customImage2 = docker.build("shridhanr/${SERVICE_NAME}-action", "-f ${dockerfile2} ." "--build-arg GIT_PAT=${PAT} .")
+                def customImage1 = docker.build("shridhanr/${SERVICE_NAME}-main", "-f ${dockerfile1}", "--build-arg GIT_PAT=${PAT} .")
+                def customImage2 = docker.build("shridhanr/${SERVICE_NAME}-action", "-f ${dockerfile2}" "--build-arg GIT_PAT=${PAT} .")
                    /* Push the image to the custom Registry */
                 customImage1.push("${env.BUILD_ID}")
                 customImage1.push('latest')
