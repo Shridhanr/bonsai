@@ -6,7 +6,7 @@ COPY . /app
 
 COPY backend/data /app/data
 
-RUN chmod +x /app/data/
+RUN chmod -R 755 /app/data/
 
 RUN  rasa train
 
