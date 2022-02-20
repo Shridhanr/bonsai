@@ -10,7 +10,6 @@ node('master') {
 
             //global variable
             def SERVICE_NAME = sh(returnStdout: true, script: "git config --get remote.origin.url | cut -f 5 -d '/' | sed 's/.git//g'").trim()
-            def SERVICE_NAME = "${service_name}"
             def dockerfile1 = 'backend/Dockerfile.main'
             def dockerfile2 = 'actions/Dockerfile.action'
 
