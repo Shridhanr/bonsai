@@ -13,7 +13,7 @@ node('master') {
             def dockerfile1 = 'backend/Dockerfile.main'
             def dockerfile2 = 'actions/Dockerfile.action'
 
-            stage('Docker Build & Push') {
+            /* stage('Docker Build & Push') {
                 docker.withRegistry('https://registry.hub.docker.com', 'Docker_creds') { 
                 def customImage1 = docker.build("shridhanr/${SERVICE_NAME}-main", "-f ${dockerfile1} .")
                 def customImage2 = docker.build("shridhanr/${SERVICE_NAME}-action", "-f ${dockerfile2} .")
@@ -22,7 +22,7 @@ node('master') {
                 customImage2.push("${env.BUILD_ID}")
                 customImage2.push('latest')
                 }
-            }
+            } */
 
             stage('Deployment') {
                 def k8sImage = docker.image('shridhanr/bonsai-main')
@@ -31,6 +31,7 @@ node('master') {
                     withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                         sh 'mkdir .kube && cat $KUBECONFIG > .kube/config'
                        // sh "kubectl -n app create configmap ${SERVICE_NAME}-dev-config --from-file=config/dev.yaml -o yaml --dry-run=client | kubectl apply -f -"
+                        sh 'export KUBECONFIG=${WORKSPACE}/.kube/config'
                         sh 'kubcetl get nodes'
                         sh 'chmod +x K8s_Objects/deploy.sh'
                         sh "K8s_Objects/deploy.sh ${env.BUILD_ID} ${SERVICE_NAME}"
