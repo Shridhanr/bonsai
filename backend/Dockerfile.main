@@ -5,10 +5,11 @@ WORKDIR /app
 COPY . /app
 
 COPY backend/data /app/data
-RUN ls -al /app/data
+RUN ls -al /
 
 RUN pwd
-RUN  rasa train 
+#RUN chmod -R /app
+RUN  rasa train --config=/app/config.yml
 
 VOLUME /app
 VOLUME /app/data
