@@ -3,7 +3,7 @@ FROM rasa/rasa:2.5.0
 
 WORKDIR /app
 COPY . /app
-COPY /data/*.* /app/data/
+COPY /data/*.yml /app/data/
 
 RUN  rasa train
 
