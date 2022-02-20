@@ -6,8 +6,6 @@ COPY . /app
 
 COPY backend/data /app/data
 
-RUN chmod -R 755 /app/data/
-
 RUN  rasa train
 
 VOLUME /app
