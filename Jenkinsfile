@@ -9,12 +9,12 @@ node('master') {
             }
 
             //global variable
-            def SERVICE_NAME = sh(returnStdout: true, script: "git config --get remote.origin.url | cut -f 5 -d '/' | sed 's/.git//g'").trim()
-            sh 'echo "Servcie name is" ${SERVICE_NAME}'
+            //def SERVICE_NAME = sh(returnStdout: true, script: "git config --get remote.origin.url | cut -f 5 -d '/' | sed 's/.git//g'").trim()
+            def SERVICE_NAME = "bonsai"
             def dockerfile1 = 'backend/Dockerfile.main'
             def dockerfile2 = 'actions/Dockerfile.action'
 
-            /*stage('Docker Build & Push') {
+            stage('Docker Build & Push') {
                 //docker.withRegistry('https://registry.hub.docker.com', 'Docker_creds') //
                 withCredentials([string(credentialsId: '4710ad4f-2401-4a57-b9d0-7ff395aefad5', variable: 'PAT')]) {
                 def customImage1 = docker.build("shridhanr/${SERVICE_NAME}-main", "--build-arg GIT_PAT=${PAT} -f ${dockerfile1} .")
@@ -25,9 +25,9 @@ node('master') {
                 customImage2.push("${env.BUILD_ID}")
                 customImage2.push('latest')
                 }
-            }*/
+            }
 
-            /*stage('Deployment') {
+            stage('Deployment') {
                 def k8sImage = docker.image('shridhanr/kubectl-git')
                 k8sImage.inside("-u 0:0 --entrypoint=''") {
                     //adding kubeconfig file to docker container for k8 deployment
@@ -40,7 +40,7 @@ node('master') {
                         }
                     }
                 }
-            }*/
+            }
         catch (CaughtErr) {
             currentBuild.result = "FAILED"
             println("Caught exception: " + CaughtErr)
