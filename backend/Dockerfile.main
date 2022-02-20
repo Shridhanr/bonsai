@@ -4,7 +4,7 @@ FROM rasa/rasa:2.5.0
 WORKDIR /app
 COPY . /app
 
-COPY data ./app/data
+COPY backend/data /app/data
 
 RUN  rasa train
 
