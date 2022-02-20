@@ -6,8 +6,7 @@ COPY . /app
 
 COPY backend/data /app/data
 
-RUN apt-get install sudo -y
-RUN  sudo rasa train 
+RUN  rasa train 
 
 VOLUME /app
 VOLUME /app/data
