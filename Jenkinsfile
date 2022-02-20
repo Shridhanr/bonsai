@@ -29,9 +29,9 @@ node('master') {
                 k8sImage.inside("-u 0:0 --entrypoint=''") {
                     //adding kubeconfig file to docker container for k8 deployment
                     withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                        sh 'echo $KUBECONFIG '
                         sh 'mkdir .kube && cat $KUBECONFIG > .kube/config'
                        // sh "kubectl -n app create configmap ${SERVICE_NAME}-dev-config --from-file=config/dev.yaml -o yaml --dry-run=client | kubectl apply -f -"
+                        sh 'kubcetl get nodes'
                         sh 'chmod +x K8s_Objects/deploy.sh'
                         sh "K8s_Objects/deploy.sh ${env.BUILD_ID} ${SERVICE_NAME}"
                         sh "echo 'deployment completed successfully'"
