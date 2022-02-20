@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{SERVICE_NAME}}
+  name: {{SERVICE_NAME}}
+  namespace: customer-1
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: {{SERVICE_NAME}}
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{SERVICE_NAME}}
+    spec:
+      containers:
+      - image: bonsai/{{SERVICE_NAME}}-main:{{IMAGE_TAG}}
+        imagePullPolicy: Always
+        name: {{SERVICE_NAME}}-main-container
+        volumes:
+        - name: appdata-vol
+          configMap:
+            name: app/data
+        - name: appmodels-vol
+          configMap:
+            name: app/models  
+      - image: bonsai/{{SERVICE_NAME}}-action:{{IMAGE_TAG}}
+        imagePullPolicy: Always
+        name: {{SERVICE_NAME}}-action-container
+      restartPolicy: Always
+
