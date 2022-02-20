@@ -12,5 +12,5 @@ COPY ./actions/connector/MyIO.py /app
 USER root 
 RUN pip3 install -U pip
 RUN pwd
-RUN pip3 install -r ./actions/requirements-actions.txt
+RUN pip3 install -r actions/requirements-actions.txt
 USER 1001 
