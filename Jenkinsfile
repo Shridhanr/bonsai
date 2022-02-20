@@ -18,7 +18,7 @@ node('master') {
                 //docker.withRegistry('https://registry.hub.docker.com', 'Docker_creds') //
                 withCredentials([string(credentialsId: '4710ad4f-2401-4a57-b9d0-7ff395aefad5', variable: 'PAT')]) {
                 def customImage1 = docker.build("shridhanr/${SERVICE_NAME}-main", "-f ${dockerfile1} .")
-                def customImage1 = docker.build("shridhanr/${SERVICE_NAME}-main", "-f ${dockerfile2} .")
+                def customImage2 = docker.build("shridhanr/${SERVICE_NAME}-main", "-f ${dockerfile2} .")
                 //def customImage2 = docker.build("shridhanr/${SERVICE_NAME}-action", "--build-arg GIT_PAT=${PAT} -f ${dockerfile2} .")
                    // Push the image to the custom Registry //
                 customImage1.push("${env.BUILD_ID}")
