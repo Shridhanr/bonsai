@@ -32,7 +32,7 @@ node('master') {
                 def k8sImage = docker.image('shridhanr/bonsai-main')
                 k8sImage.inside("-u 0:0 --entrypoint=''") {
                     //adding kubeconfig file to docker container for k8 deployment
-                    withCredentials([file(credentialsId: 'kubernetes', variable: 'KUBECONFIG')]) {
+                    withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                         sh 'mkdir .kube && cat $KUBECONFIG > .kube/config'
                        // sh "kubectl -n app create configmap ${SERVICE_NAME}-dev-config --from-file=config/dev.yaml -o yaml --dry-run=client | kubectl apply -f -"
                         sh 'chmod +x K8s_Objects/deploy.sh'
