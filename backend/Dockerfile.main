@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . /app
 
 COPY backend/data /app/data
-RUN ls -al /
+RUN ls -al /app
 
 RUN pwd
 #RUN chmod -R /app
