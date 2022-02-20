@@ -6,7 +6,7 @@ COPY . /app
 
 COPY backend/data /app/data
 
-RUN  rasa train --config=/app/config.yml
+RUN  rasa train --config=./config.yml
 
 VOLUME /app
 VOLUME /app/data
