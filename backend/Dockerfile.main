@@ -9,7 +9,7 @@ RUN ls -al /app
 
 RUN pwd
 #RUN chmod -R /app
-RUN  rasa train --config=/app/config.yml
+RUN  rasa train --config=/app/backend/config.yml
 
 VOLUME /app
 VOLUME /app/data
