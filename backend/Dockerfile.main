@@ -5,7 +5,11 @@ WORKDIR /app
 COPY . /app
 
 COPY backend/data /app/data
+RUN ls -al /app/data
+
 RUN mkdir ./config
+
+RUN ls -al ./config
 RUN  rasa train 
 
 VOLUME /app
