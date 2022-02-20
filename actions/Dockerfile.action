@@ -11,6 +11,8 @@ COPY ./actions/connector/MyIO.py /app
 #install dependencies inside Docker container
 USER root 
 RUN pip3 install -U pip
-RUN pwd
-RUN pip3 install -r actions/requirements-actions.txt
+
+RUN ls -al
+RUN ls -al /actions
+RUN pip3 install -r /actions/requirements-actions.txt
 USER 1001 
