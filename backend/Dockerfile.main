@@ -5,8 +5,8 @@ WORKDIR /app
 COPY . /app
 
 COPY backend/data /app/data
-RUN chdir /backend/app/data
-RUN chmod +x /.config
+
+RUN chmod +x /backend/data/
 
 RUN  rasa train
 
