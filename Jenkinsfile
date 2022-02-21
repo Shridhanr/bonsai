@@ -38,10 +38,4 @@ node('master') {
             println("Caught exception: " + CaughtErr)
             // error = catchException exception: CaughtErr
             } 
-         finally {
-            println("CurrentBuild result: " + currentBuild.result)
-            // Success or failure, always send notifications
-            notifyBuild(currentBuild.result)
-            }
-        }
     }
