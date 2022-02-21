@@ -31,7 +31,8 @@ node('master') {
                     //adding kubeconfig file to docker container for k8 deployment
                     //withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                         //sh 'mkdir .kube && cat $KUBECONFIG > .kube/config'
-                    kubernetesDeploy(configs: "K8s_Objects/deploy.sh ${env.BUILD_ID} ${SERVICE_NAME}", kubeconfigId: "kubernetes")
+                    kubernetesDeploy(configs: "K8s_Objects/deployment.yaml ${env.BUILD_ID} ${SERVICE_NAME}", kubeconfigId: "kubernetes")
+                    kubernetesDeploy(configs: "K8s_Objects/service.yaml ${env.BUILD_ID} ${SERVICE_NAME}", kubeconfigId: "kubernetes")
                        // sh "kubectl -n app create configmap ${SERVICE_NAME}-dev-config --from-file=config/dev.yaml -o yaml --dry-run=client | kubectl apply -f -"
                         /*sh 'export KUBECONFIG=${WORKSPACE}/.kube/config'
                         //sh 'export PATH=$PATH:/usr/local/bin:$KUBECONFIG'
