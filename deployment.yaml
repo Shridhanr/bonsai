@@ -35,6 +35,8 @@ spec:
       - image: bonsai/bonsai-action:latest
         imagePullPolicy: Always
         name: bonsai-action-container
+      imagePullSecrets:
+      - name: image-pull-secret
       restartPolicy: Always
 
 ---
