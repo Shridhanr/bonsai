@@ -34,6 +34,8 @@ node('master') {
                         sh 'export KUBECONFIG=${WORKSPACE}/.kube/config'
                         sh 'export PATH=$PATH:/usr/local/bin:$KUBECONFIG'
                         //sh 'kubetl get nodes --kubeconfig=${WORKSPACE}/.kube/config'
+                        sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.22.2/bin/linux/amd64/kubectl"' 
+                        sh 'chmod u+x ./kubectl' 
                         sh 'kubectl get nodes'
                         sh 'chmod +x K8s_Objects/deploy.sh'
                         sh "K8s_Objects/deploy.sh ${env.BUILD_ID} ${SERVICE_NAME}"
