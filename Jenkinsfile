@@ -33,9 +33,4 @@ node('master') {
                     }
                 }
             }
-        catch (CaughtErr) {
-            currentBuild.result = "FAILED"
-            println("Caught exception: " + CaughtErr)
-            // error = catchException exception: CaughtErr
-            } 
     }
