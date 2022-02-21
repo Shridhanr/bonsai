@@ -31,12 +31,12 @@ node('master') {
                     withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                         sh 'mkdir .kube && cat $KUBECONFIG > .kube/config'
                        // sh "kubectl -n app create configmap ${SERVICE_NAME}-dev-config --from-file=config/dev.yaml -o yaml --dry-run=client | kubectl apply -f -"
-                        sh 'export KUBECONFIG=${WORKSPACE}/.kube/config'
-                        sh 'export PATH=$PATH:/usr/local/bin:$KUBECONFIG'
+                        //sh 'export KUBECONFIG=${WORKSPACE}/.kube/config'
+                        //sh 'export PATH=$PATH:/usr/local/bin:$KUBECONFIG'
                         //sh 'kubetl get nodes --kubeconfig=${WORKSPACE}/.kube/config'
                         sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.22.2/bin/linux/amd64/kubectl"' 
                         sh 'chmod u+x ./kubectl' 
-                        sh 'kubectl get nodes'
+                        sh './kubectl get nodes'
                         sh 'chmod +x K8s_Objects/deploy.sh'
                         sh "K8s_Objects/deploy.sh ${env.BUILD_ID} ${SERVICE_NAME}"
                         sh "echo 'deployment completed successfully'"
