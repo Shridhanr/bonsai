@@ -22,7 +22,7 @@ spec:
         app: haystack
     spec:
       containers:
-      - image: bonsai/bonsai-main:latest
+      - image: shridhanr/bonsai-main:latest
         imagePullPolicy: Always
         name: bonsai-main-container
         volumes:
@@ -32,7 +32,7 @@ spec:
         - name: appmodels-vol
           configMap:
             name: app/models  
-      - image: bonsai/bonsai-action:latest
+      - image: shridhanr/bonsai-action:latest
         imagePullPolicy: Always
         name: bonsai-action-container
       imagePullSecrets:
