@@ -2,15 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{SERVICE_NAME}}
-  name: {{SERVICE_NAME}}
+    app: haystack
+  name: haystack-ext
   namespace: customer-1
 spec:
   replicas: 1
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: {{SERVICE_NAME}}
+      app: haystack
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -19,12 +19,12 @@ spec:
   template:
     metadata:
       labels:
-        app: {{SERVICE_NAME}}
+        app: haystack
     spec:
       containers:
-      - image: bonsai/{{SERVICE_NAME}}-main:{{IMAGE_TAG}}
+      - image: bonsai/bonsai-main:latest
         imagePullPolicy: Always
-        name: {{SERVICE_NAME}}-main-container
+        name: bonsai-main-container
         volumes:
         - name: appdata-vol
           configMap:
@@ -32,8 +32,34 @@ spec:
         - name: appmodels-vol
           configMap:
             name: app/models  
-      - image: bonsai/{{SERVICE_NAME}}-action:{{IMAGE_TAG}}
+      - image: bonsai/bonsai-action:latest
         imagePullPolicy: Always
-        name: {{SERVICE_NAME}}-action-container
+        name: bonsai-action-container
       restartPolicy: Always
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: main-server
+  namespace: customer-1
+spec:
+  type: ClusterIP
+  selector:
+    app: haystack
+  ports:
+    - port: 5005
+      targetPort: 5005
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: action-server
+  namespace: customer-1
+spec:
+  type: ClusterIP
+  selector:
+    app: haystack
+  ports:
+    - port: 5055
+      targetPort: 5055
