@@ -47,7 +47,7 @@ node('master') {
                         
                         sh "K8s_Objects/deploy.sh ${env.BUILD_ID} ${SERVICE_NAME}"*/
                         sh "echo 'deployment completed successfully'"
-                        }
+                        //}
                     }
                 }
             }
