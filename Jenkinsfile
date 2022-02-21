@@ -33,7 +33,7 @@ node('master') {
                     }
                 }
             }
-        catch (CaughtErr) {
+        /*catch (CaughtErr) {
             currentBuild.result = "FAILED"
             println("Caught exception: " + CaughtErr)
             // error = catchException exception: CaughtErr
@@ -43,5 +43,5 @@ node('master') {
             // Success or failure, always send notifications
             notifyBuild(currentBuild.result)
             }
-        }
+        }*/
     }
