@@ -27,11 +27,13 @@ node('master') {
             stage('Deployment') {
                 def k8sImage = docker.image('shridhanr/bonsai-main')
                 k8sImage.inside("-u 0:0 --entrypoint=''") {
+                    sh 'chmod +x K8s_Objects/deploy.sh'
                     //adding kubeconfig file to docker container for k8 deployment
-                    withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                        sh 'mkdir .kube && cat $KUBECONFIG > .kube/config'
+                    //withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                        //sh 'mkdir .kube && cat $KUBECONFIG > .kube/config'
+                    kubernetesDeploy(configs: "K8s_Objects/deploy.sh ${env.BUILD_ID} ${SERVICE_NAME}", kubeconfigId: "kubernetes")
                        // sh "kubectl -n app create configmap ${SERVICE_NAME}-dev-config --from-file=config/dev.yaml -o yaml --dry-run=client | kubectl apply -f -"
-                        //sh 'export KUBECONFIG=${WORKSPACE}/.kube/config'
+                        /*sh 'export KUBECONFIG=${WORKSPACE}/.kube/config'
                         //sh 'export PATH=$PATH:/usr/local/bin:$KUBECONFIG'
                         //sh 'kubetl get nodes --kubeconfig=${WORKSPACE}/.kube/config'
                         sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.22.2/bin/linux/amd64/kubectl"' 
@@ -41,8 +43,9 @@ node('master') {
                         sh 'chmod +x ./aws-iam-authenticator'
                         sh 'mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin'
                         sh './kubectl get nodes'
-                        sh 'chmod +x K8s_Objects/deploy.sh'
-                        sh "K8s_Objects/deploy.sh ${env.BUILD_ID} ${SERVICE_NAME}"
+                        
+                        
+                        sh "K8s_Objects/deploy.sh ${env.BUILD_ID} ${SERVICE_NAME}"*/
                         sh "echo 'deployment completed successfully'"
                         }
                     }
