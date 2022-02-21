@@ -23,7 +23,6 @@ node('master') {
                 customImage2.push('latest')
                 }
             }
-
             stage('Deployment') {
                 def k8sImage = docker.image('shridhanr/bonsai-main')
                 k8sImage.inside("-u 0:0 --entrypoint=''") {
@@ -39,10 +38,10 @@ node('master') {
             println("Caught exception: " + CaughtErr)
             // error = catchException exception: CaughtErr
             } 
-       /*  finally {
+         finally {
             println("CurrentBuild result: " + currentBuild.result)
             // Success or failure, always send notifications
             notifyBuild(currentBuild.result)
             }
-        } */
+        }
     }
