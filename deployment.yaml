@@ -7,6 +7,15 @@ metadata:
   name: rasaactionsnbackend
   namespace: customer-1
 spec:
+  affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - non-gpu
   replicas: 1
   revisionHistoryLimit: 2
   selector:
@@ -146,6 +155,15 @@ spec:
       labels:
         app: rasaui
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - non-gpu
       containers:
       - image: shridhanr/bonsai-rasaui:latest
         imagePullPolicy: Always
