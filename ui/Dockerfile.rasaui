@@ -4,6 +4,8 @@ WORKDIR /home/user
 
 RUN apt-get update && apt-get install -y curl git pkg-config cmake
 
+RUN pwd
+
 # copy code
 COPY setup.py /home/user/
 COPY utils.py /home/user/

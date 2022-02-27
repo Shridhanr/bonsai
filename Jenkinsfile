@@ -2,7 +2,7 @@
 
 node('master') {
     timestamps {
-        try {
+        //try {
             step([$class: 'WsCleanup'])
             stage('Checkout code') {
                 checkout scm
@@ -40,8 +40,8 @@ node('master') {
                     sh "echo 'deployment completed successfully'"
                     }
                 }
-            }
-        catch (CaughtErr) {
+    }
+        /*catch (CaughtErr) {
             currentBuild.result = "FAILED"
             println("Caught exception: " + CaughtErr)
             // error = catchException exception: CaughtErr
@@ -52,5 +52,4 @@ node('master') {
             notifyBuild(currentBuild.result)
             }
         }*/
-    }
 }
