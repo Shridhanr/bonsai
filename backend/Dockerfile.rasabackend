@@ -7,7 +7,7 @@ COPY backend/data /app/data
 
 RUN pwd
 
-RUN  rasa train
+RUN  rasa train --config=backend/config.yaml
 
 VOLUME /app
 VOLUME /app/data
