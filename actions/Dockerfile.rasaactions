@@ -8,7 +8,7 @@ COPY actions/requirements-actions.txt ./
 #copy everything in ./actions directory (your custom actions code) to /app/actions in container
 # COPY ./ /app/actions
 COPY actions/actions.py /app
-COPY actioconnector/MyIO.py /app
+COPY actiocs/onnector/MyIO.py /app
 #install dependencies inside Docker container
 USER root 
 RUN pip3 install -U pip
