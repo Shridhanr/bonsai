@@ -19,16 +19,16 @@ node('master') {
                 docker.withRegistry('https://registry.hub.docker.com', 'Docker_creds') { 
                 def customImage1 = docker.build("shridhanr/${SERVICE_NAME}-rasaactions", "-f ${dockerfile1} .")
                 def customImage2 = docker.build("shridhanr/${SERVICE_NAME}-rasabackend", "-f ${dockerfile2} .")
-                def customImage3 = docker.build("shridhanr/${SERVICE_NAME}-rasahaystack", "-f ${dockerfile3} .")
-                def customImage4 = docker.build("shridhanr/${SERVICE_NAME}-rasaui", "-f ${dockerfile4} .")
+                //def customImage3 = docker.build("shridhanr/${SERVICE_NAME}-rasahaystack", "-f ${dockerfile3} .")
+                //def customImage4 = docker.build("shridhanr/${SERVICE_NAME}-rasaui", "-f ${dockerfile4} .")
                 customImage1.push("${env.BUILD_ID}")
                 customImage1.push('latest')
                 customImage2.push("${env.BUILD_ID}")
                 customImage2.push('latest')
-                customImage3.push("${env.BUILD_ID}")
-                customImage3.push('latest')
-                customImage4.push("${env.BUILD_ID}")
-                customImage4.push('latest')
+                //customImage3.push("${env.BUILD_ID}")
+                //customImage3.push('latest')
+                //customImage4.push("${env.BUILD_ID}")
+                //customImage4.push('latest')
                 }
             } 
 

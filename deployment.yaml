@@ -1,3 +1,4 @@
+---
 #Rasa Actions and Backend Deoplyment
 apiVersion: apps/v1
 kind: Deployment
@@ -64,135 +65,22 @@ spec:
     nodePort: 31055
   selector:
     app: rasaactionsnbackend
----
 
-# RASA Haystack Deployment
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: rasahaystack
-  name: rasahaystack
-  namespace: customer-1
-spec:
-  replicas: 1
-  revisionHistoryLimit: 2
-  selector:
-    matchLabels:
-      app: rasahaystack
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: rasahaystack
-    spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - gpu
-      containers:
-      - image: shridhanr/bonsai-rasahaystack:latest
-        imagePullPolicy: Always
-        name: bonsai-rasahaystack-container
-        volumes:
-        - name: appdata-vol
-          configMap:
-            name: app/data
-        - name: appmodels-vol
-          configMap:
-            name: app/models  
-      - name: image-pull-secret
-      restartPolicy: Always
+
 ---
-## RASA Haystack Service
+#Rasa Actions Service
 apiVersion: v1
 kind: Service
 metadata:
-  name: np-rasahaystack
+  name: np-rasaactions
   namespace: customer-1
 spec:
   type: NodePort
   ports:
-  - port: 8000
-    targetPort: 8000
-    name: rasahaystack
-    nodePort: 38000
+  - port: 5005
+    targetPort: 5005
+    name: rasaactions
+    nodePort: 31005
   selector:
-    app: rasahaystack
-
----
-# RASA UI Deployment
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: rasaui
-  name: rasaui
-  namespace: customer-1
-spec:
-  replicas: 1
-  revisionHistoryLimit: 2
-  selector:
-    matchLabels:
-      app: rasaui
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: rasaui
-    spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - non-gpu
-      containers:
-      - image: shridhanr/bonsai-rasaui:latest
-        imagePullPolicy: Always
-        name: bonsai-rasaui-container
-        volumes:
-        - name: appdata-vol
-          configMap:
-            name: app/data
-        - name: appmodels-vol
-          configMap:
-            name: app/models  
-      - name: image-pull-secret
-      restartPolicy: Always
----
-## RASA UI Service
-apiVersion: v1
-kind: Service
-metadata:
-  name: np-rasaui
-  namespace: customer-1
-spec:
-  type: NodePort
-  ports:
-  - port: 8501
-    targetPort: 8501
-    name: np-rasaui
-    nodePort: 38501
-  selector:
-    app: rasahaystack
-
-
+    app: rasaactionsnbackend
 
