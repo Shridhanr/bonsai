@@ -12,11 +12,11 @@ node('master') {
             def SERVICE_NAME = sh(returnStdout: true, script: "git config --get remote.origin.url | cut -f 5 -d '/' | sed 's/.git//g'").trim()
            
 
-            stage('Docker Build & Push') {
+            stage('Docker Compose & Push') {
                 docker.withRegistry('https://registry.hub.docker.com', 'Docker_creds') { 
                 //def customImage1 = docker.build("shridhanr/${SERVICE_NAME}-rasaactions", "-f ${dockerfile1} .")
-                docker-compose build
-                docker-compose push
+                sh 'sudo docker-compose build'
+                sh 'sudo docker-compose push'
 
                 }
             } 
