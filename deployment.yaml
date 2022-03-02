@@ -100,9 +100,9 @@ spec:
                 values:
                 - gpu
       containers:
-      - image: shridhanr/haystack_api:latest
+      - name: bonsai-rasahaystack-container
+        image: shridhanr/haystack_api:tagname
         imagePullPolicy: Always
-        name: bonsai-rasahaystack-container
         volumes:
         - name: appdata-vol
           configMap:
@@ -110,6 +110,7 @@ spec:
         - name: appmodels-vol
           configMap:
             name: app/models  
+      imagePullSecrets:
       - name: image-pull-secret
       restartPolicy: Always
 ---
