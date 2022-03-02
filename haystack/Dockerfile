@@ -25,8 +25,8 @@ COPY setup.py setup.cfg pyproject.toml VERSION.txt LICENSE README.md models* /ho
 COPY rest_api /home/user/rest_api
 
 # Install package
-RUN git clone https://github.com/deepset-ai/haystack.git
-RUN cd haystack
+#RUN git clone https://github.com/deepset-ai/haystack.git
+#RUN cd haystack
 RUN pip install --upgrade pip
 RUN pip install -e .[all]
 #RUN pip install --no-cache-dir .[docstores,crawler,preprocessing,ocr,ray]
