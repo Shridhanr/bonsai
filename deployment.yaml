@@ -65,6 +65,22 @@ spec:
   selector:
     app: rasaactionsnbackend
 ---
+#Rasa Actions Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: np-rasaweb
+  namespace: customer-1
+spec:
+  type: NodePort
+  ports:
+  - port: 5005
+    targetPort: 5005
+    name: rasaactionsnbackend
+    nodePort: 31505
+  selector:
+    app: rasaactionsnbackend
+---
 
 # RASA Haystack Deployment
 apiVersion: apps/v1
@@ -126,7 +142,7 @@ spec:
   - port: 8000
     targetPort: 8000
     name: rasahaystack
-    nodePort: 38000
+    nodePort: 31000
   selector:
     app: rasahaystack
 
@@ -191,9 +207,9 @@ spec:
   - port: 8501
     targetPort: 8501
     name: np-rasaui
-    nodePort: 38501
+    nodePort: 31501
   selector:
-    app: rasahaystack
+    app: rasaui
 
 
 
