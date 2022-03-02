@@ -10,5 +10,6 @@ RUN  rasa train
 VOLUME /app
 VOLUME /app/data
 VOLUME /app/models
+EXPOSE 5055
 
 CMD [ "run","-m","/app/models","--enable-api","--cors","*","--debug", "--endpoints", "endpoints.yml" ]
