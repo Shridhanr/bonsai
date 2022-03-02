@@ -32,7 +32,7 @@ spec:
         app: rasaactionsnbackend
     spec:
       containers:
-      - image: shridhanr/rasa_haystack_db-main_action_server:latest
+      - image: shridhanr/action_server:latest
         imagePullPolicy: Always
         name: bonsai-rasaactions-container
         volumes:
@@ -42,7 +42,7 @@ spec:
         - name: appmodels-vol
           configMap:
             name: app/models  
-      - image: shridhanr/rasa_haystack_db-main_rasa:latest
+      - image: shridhanr/haystack-rasa_server:latest
         imagePullPolicy: Always
         name: bonsai-rasabackend-container
       imagePullSecrets:
@@ -100,7 +100,7 @@ spec:
                 values:
                 - gpu
       containers:
-      - image: shridhanr/deepset/haystack-cpu:latest
+      - image: shridhanr/haystack_api:latest
         imagePullPolicy: Always
         name: bonsai-rasahaystack-container
         volumes:
@@ -165,7 +165,7 @@ spec:
                 values:
                 - non-gpu
       containers:
-      - image: shridhanr/deepset/haystack-streamlit-ui:latest
+      - image: shridhanr/haystack_ui:latest
         imagePullPolicy: Always
         name: bonsai-rasaui-container
         volumes:
