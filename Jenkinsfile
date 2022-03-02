@@ -22,7 +22,7 @@ node('master') {
             } 
 
             stage('Deployment') {
-                def k8sImage = docker.image('shridhanr/dcompose')
+                def k8sImage = docker.image('shridhanr/haystack_ui')
                 k8sImage.inside("-u 0:0 --entrypoint=''") {
                     //sh 'chmod +x K8s_Objects/deploy.sh'
                     kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "kubernetes")
