@@ -117,7 +117,7 @@ spec:
                 - gpu
       containers:
       - name: bonsai-rasahaystack-container
-        image: docker.io/shridhanr/haystack_api:tagname
+        image: docker.io/shridhanr/haystack_api:latest
         imagePullPolicy: Always
         volumes:
         - name: appdata-vol
