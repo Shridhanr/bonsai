@@ -10,11 +10,10 @@ node('master') {
 
             //global variable
             def SERVICE_NAME = dcompose
-           
+            def customImage1 = docker-compose ("shridhanr/${SERVICE_NAME}"
 
             stage('Docker Compose & Push') {
                 docker.withRegistry('https://registry.hub.docker.com', 'Docker_creds') { 
-                def customImage1 = docker-compose ("shridhanr/${SERVICE_NAME}"
                 sh 'sudo docker-compose build'
                 /* sh 'docker pull deepset/haystack-cpu:latest'
                 sh 'docker tag deepset/haystack-cpu:latest shridhanr/dcompose-haystack:latest'
