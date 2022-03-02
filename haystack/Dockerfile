@@ -25,16 +25,21 @@ COPY setup.py setup.cfg pyproject.toml VERSION.txt LICENSE README.md models* /ho
 COPY rest_api /home/user/rest_api
 
 # Install package
+RUN git clone https://github.com/deepset-ai/haystack.git
+RUN cd haystack
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir .[docstores,crawler,preprocessing,ocr,ray]
-RUN pip install --no-cache-dir rest_api/
-RUN ls /home/user
-RUN pip freeze
+RUN pip install -e .[all]
+#RUN pip install --no-cache-dir .[docstores,crawler,preprocessing,ocr,ray]
+#RUN pip install --no-cache-dir rest_api/
+#RUN ls /home/user
+#RUN pip freeze
 #RUN python3 -c "from haystack.utils.docker import cache_models;cache_models()"
 #RUN python3 -c "from haystack.utils.docker import cache_models()"
 
 
 # create folder for /file-upload API endpoint with write permissions, this might be adjusted depending on FILE_UPLOAD_PATH
+RUN cd ..
+RUN pwd
 RUN mkdir -p /home/user/file-upload
 RUN chmod 777 /home/user/file-upload
 
