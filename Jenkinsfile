@@ -9,16 +9,14 @@ node('master') {
             }
 
             //global variable
-            def SERVICE_NAME = dcompose
-            def customImage1 = docker-compose ("shridhanr/${SERVICE_NAME}"
+            def SERVICE_NAME = sh(returnStdout: true, script: "git config --get remote.origin.url | cut -f 5 -d '/' | sed 's/.git//g'").trim()
+           
 
             stage('Docker Compose & Push') {
                 docker.withRegistry('https://registry.hub.docker.com', 'Docker_creds') { 
+                //def customImage1 = docker.build("shridhanr/${SERVICE_NAME}-rasaactions", "-f ${dockerfile1} .")
                 sh 'sudo docker-compose build'
-                /* sh 'docker pull deepset/haystack-cpu:latest'
-                sh 'docker tag deepset/haystack-cpu:latest shridhanr/dcompose-haystack:latest'
-                sh 'docker push shridhanr/dcompose-haystack:latest' */
-                 sh "sudo docker-compose push ${customImage1}" 
+                sh 'sudo docker-compose push'
 
                 }
             } 
