@@ -31,7 +31,7 @@ RUN pip install --no-cache-dir rest_api/
 RUN ls /home/user
 RUN pip freeze
 #RUN python3 -c "from haystack.utils.docker import cache_models;cache_models()"
-RUN python3 -c "from haystack.utils.docker import cache_models()"
+#RUN python3 -c "from haystack.utils.docker import cache_models()"
 
 
 # create folder for /file-upload API endpoint with write permissions, this might be adjusted depending on FILE_UPLOAD_PATH
