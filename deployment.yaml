@@ -182,9 +182,9 @@ spec:
                 values:
                 - non-gpu
       containers:
-      - image: shridhanr/haystack_ui:latest
+      - name: bonsai-rasaui-container
+        image: shridhanr/haystack_ui:latest
         imagePullPolicy: Always
-        name: bonsai-rasaui-container
         volumes:
         - name: appdata-vol
           configMap:
@@ -192,6 +192,7 @@ spec:
         - name: appmodels-vol
           configMap:
             name: app/models  
+      imagePullSecrets:
       - name: image-pull-secret
       restartPolicy: Always
 ---
