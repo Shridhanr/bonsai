@@ -15,7 +15,7 @@ node('master') {
             stage('Docker Compose & Push') {
                 docker.withRegistry('https://registry.hub.docker.com', 'Docker_creds') { 
                 //def customImage1 = docker.build("shridhanr/${SERVICE_NAME}-rasaactions", "-f ${dockerfile1} .")
-                sh 'sudo docker-compose build'
+                sh "sudo docker-compose build"
                 sh 'sudo docker-compose push'
 
                 }

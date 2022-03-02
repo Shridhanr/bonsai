@@ -4,12 +4,14 @@ services:
     container_name: "rasa_server"
     build: 
       context: backend
+    image: "shridhanr/haystack-rasa_server:latest"
     ports: 
       - "5005:5005"
   action_server:
     container_name: "action-server"
     build: 
       context: actions
+    image: "shridhanr/action_server:latest"
     volumes:
       - ./actions:/app/actions
     ports:
@@ -18,7 +20,7 @@ services:
     build:
       context: haystack
       dockerfile: Dockerfile
-    image: "deepset/haystack-cpu:latest"
+    image: "shridhanr/haystack_api:latest"
     # Mount custom Pipeline YAML and custom Components.
     # volumes:
     #   - ./rest_api/pipeline:/home/user/rest_api/pipeline
@@ -48,7 +50,7 @@ services:
     build:
       context: ui
       dockerfile: Dockerfile
-    image: "deepset/haystack-streamlit-ui:latest"
+    image: "shridhanr/haystack_ui:latest"
     ports:
       - 8501:8501
     restart: on-failure
