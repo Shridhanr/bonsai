@@ -35,6 +35,8 @@ spec:
       - image: docker.io/shridhanr/action_server:latest
         imagePullPolicy: Always
         name: bonsai-rasaactions-container
+        ports:
+        - containerPort: 5005
         volumes:
         - name: appdata-vol
           configMap:
@@ -45,6 +47,9 @@ spec:
       - image: docker.io/shridhanr/haystack-rasa_server:latest
         imagePullPolicy: Always
         name: bonsai-rasabackend-container
+        ports:
+        - containerPort: 5055
+            
       imagePullSecrets:
       - name: image-pull-secret
       restartPolicy: Always
@@ -119,6 +124,8 @@ spec:
       - name: bonsai-rasahaystack-container
         image: docker.io/shridhanr/haystack_api:latest
         imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
         volumes:
         - name: appdata-vol
           configMap:
@@ -184,6 +191,8 @@ spec:
       containers:
       - name: bonsai-rasaui-container
         image: docker.io/shridhanr/haystack_ui:latest
+        ports:
+        - containerPort: 8501
         imagePullPolicy: Always
         volumes:
         - name: appdata-vol
