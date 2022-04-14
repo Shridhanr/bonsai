@@ -57,15 +57,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: rasaactionsnbackend
+  name: np-rasaactionsnbackend
   namespace: customer-1
-  annotations:
-    konghq.com/path: /rasaactionsnbackend
 spec:
+  type: NodePort
   ports:
   - port: 5055
     targetPort: 5055
     name: rasaactionsnbackend
+    nodePort: 31055
   selector:
     app: rasaactionsnbackend
 ---
@@ -73,15 +73,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: rasaweb
+  name: np-rasaweb
   namespace: customer-1
-  annotations:
-    konghq.com/path: /rasaweb
 spec:
+  type: NodePort
   ports:
   - port: 5005
     targetPort: 5005
-    name: rasaweb
+    name: rasaactionsnbackend
+    nodePort: 31505
   selector:
     app: rasaactionsnbackend
 ---
@@ -140,15 +140,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: rasahaystack
+  name: np-rasahaystack
   namespace: customer-1
-  annotations:
-    konghq.com/path: /rasahaystack
 spec:
+  type: NodePort
   ports:
   - port: 8000
     targetPort: 8000
     name: rasahaystack
+    nodePort: 31000
   selector:
     app: rasahaystack
 
@@ -208,15 +208,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: rasaui
+  name: np-rasaui
   namespace: customer-1
-  annotations:
-    konghq.com/path: /rasaui
 spec:
+  type: NodePort
   ports:
   - port: 8501
     targetPort: 8501
-    name: rasaui
+    name: np-rasaui
+    nodePort: 31501
   selector:
     app: rasaui
 
